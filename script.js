@@ -3,7 +3,7 @@
 var lowerCaseCharacters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var upperCaseCharacters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N","O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var numberCharacters = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var specialCharacters = ["!",'"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~", "//"];
+var specialCharacters = ["!",'"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"];
 
 // Funtion to generate password from arrays
 var generatePassword = function () {
@@ -18,6 +18,8 @@ var generatePassword = function () {
   }
   console.log(passwordLength)
   
+  // Ask user to include LOWERCASE or not
+  var lowerCaseIncluded = window.confirm("Add Lowercase Letters?");
   // Ask user to include UPPERCASE or not
   var upperCaseIncluded = window.confirm("Add Uppercase Letters?");
   // Ask user to include NUMBERS or not
@@ -26,8 +28,12 @@ var generatePassword = function () {
   var specialCharactersIncluded = window.confirm("Add Special Characters?");
     
   // COMBINE USER CHOICES
-  let userChoice = lowerCaseCharacters;
-  // If user pressed OK, add uppercase to the list
+  let userChoice = (" ");
+  // If user pressed OK, add lowercase to the list
+  if (lowerCaseIncluded) {
+    userChoice = lowerCaseCharacters
+  }
+   // If user pressed OK, add uppercase to the list
   if (upperCaseIncluded) {
     userChoice = userChoice.concat(upperCaseCharacters);
   } 
@@ -39,17 +45,20 @@ var generatePassword = function () {
   if (specialCharactersIncluded) {
     userChoice = userChoice.concat(specialCharacters);
   }
-
   console.log(userChoice)
 
-  // Get random index from selected arrays
-  var password = []
-    for (let i = 0; i < passwordLength; i++) {
-      var index = Math.floor(Math.random() * userChoice.length);
-      var password = userChoice[index];
-    }
-
-    return password
+  // Generate random array pulled from selected arrays at the selected length
+  function passwordCharacters (userChoice) {
+    return userChoice[Math.floor(Math.random() * userChoice.length)]
+  }
+  
+  var characters = userChoice,
+    result = " ";
+  for (var i = 0; i < passwordLength; i++) {
+    result += passwordCharacters(characters)
+  }
+  console.log(result)
+  return result;
 }
 
 
@@ -67,4 +76,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
