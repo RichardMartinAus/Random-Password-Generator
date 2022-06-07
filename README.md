@@ -8,7 +8,7 @@ The users opens the HTML page in a browser. Once the "Generate Password" button 
 
 Link to the deployed app: 
 
-Below is a screenshot of the deployed app:
+Below is a screenshot of the deployed app: [https://richardmartinaus.github.io/Random-Password-Generator/](https://richardmartinaus.github.io/Random-Password-Generator/)
 
 ![Screenshot of refactored deployed portfolio site](assets/images/screenshot03.png?raw=true)
 
